@@ -36,7 +36,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
                 },
                 {
                     id: newState.guild.id,
-                    deny: [PermissionsBitField.Flags.Connect], // Sử dụng PermissionsBitField.Flags
+                    allow: [PermissionsBitField.Flags.Connect], // Sử dụng PermissionsBitField.Flags
                 },
             ],
         });
