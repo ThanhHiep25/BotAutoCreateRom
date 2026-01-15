@@ -5,6 +5,8 @@ const {
     UserSelectMenuBuilder, EmbedBuilder, ComponentType 
 } = require('discord.js');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const express = require('express');
+const app = express();
 const fs = require('fs');
 require('dotenv').config();
 
@@ -506,3 +508,13 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(TOKEN);
+
+// --- KEEP ALIVE CHO RENDER ---
+app.get('/', (req, res) => {
+    res.send('Bot Discord Auto Room đang chạy... 🤖');
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`🌏 Web Server đang chạy tại port: ${port}`);
+});
