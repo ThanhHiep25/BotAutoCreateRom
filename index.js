@@ -153,7 +153,21 @@ function createControlPanel() {
 // --- READY ---
 client.on('ready', () => {
     console.log(`✅ Bot Online: ${client.user.tag}`);
+    let statusIndex = 0;
+    setInterval(() => {
+        const voiceCount = voiceSessions.size; 
+        const activities = [
+            { name: `Quản lý ${voiceCount} người đang voice`, type: ActivityType.Watching },
+            { name: `Hỗ trợ HD Audio`, type: ActivityType.Playing },
+            { name: `Cày voice nhận Top!`, type: ActivityType.Competing },
+            { name: `Hệ thống Trust & Block`, type: ActivityType.Listening }
+        ];
+        const activity = activities[statusIndex];
+        client.user.setPresence({ activities: [{ name: activity.name, type: activity.type }], status: 'online' });
+        statusIndex = (statusIndex + 1) % activities.length;
+    }, 10000); 
 });
+
 
 // --- SỰ KỆN: AUTO-MOD + GHOST MODE + AI CHAT ---
 client.on('messageCreate', async message => {
